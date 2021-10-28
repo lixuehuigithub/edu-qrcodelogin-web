@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>edu-qrcodelogin-web</artifactId>
+    <description>二维码登录功能demo</description>
+    <packaging>war</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!-- 日志 -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j2.version>2.7</log4j2.version>
+        <!-- 异步日志 -->
+        <disruptor.version>3.2.0</disruptor.version>
+        <!--mysql驱动 -->
+        <mysql.version>5.1.46</mysql.version>
+        <!--oracle驱动 -->
+        <oracle.version>1.0</oracle.version>
+        <!--阿里druid连接池 -->
+        <druid.version>1.1.10</druid.version>
+        <!--mybatis-plus -->
+        <mybatis-plus.version>2.3</mybatis-plus.version>
+        <mybatis-plus-boot-starter.version>2.3</mybatis-plus-boot-starter.version>
+        <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
+        <!--dubbo -->
+        <dubbo.version>2.8.4</dubbo.version>
+        <!--zookeeper客户端 -->
+        <zkclient.version>0.8</zkclient.version>
+        <!--rocketmq -->
+        <rocketmq.version>3.2.6</rocketmq.version>
+        <!--http客户端okttp -->
+        <okhttp.version>3.9.1</okhttp.version>
+        <!--fastjson工具类 -->
+        <fastjson.version>1.2.45</fastjson.version>
+        <!--swagger API生成工具 -->
+        <swagger2.version>2.7.0</swagger2.version>
+        <swagger2-ui.version>2.7.0</swagger2-ui.version>
+        <springfox.version>2.7.0</springfox.version>
+        <swagger-annotations.version>1.5.20</swagger-annotations.version>
+        <!--通用工具类 -->
+        <commons-lang3.version>3.7</commons-lang3.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-codec.version>1.11</commons-codec.version>
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+        <jpinyin.version>1.1.8</jpinyin.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <joda.time.version>2.9.9</joda.time.version>
+        <xsequence.version>1.6</xsequence.version>
+        <!-- 阿里大于短信sdk 旧版 -->
+        <taobao-dayu.version>2017.11.30</taobao-dayu.version>
+        <jedis.version>2.9.0</jedis.version>
+        <bitwalker.version>1.21</bitwalker.version>
+        <zxing.version>3.2.1</zxing.version>
+        <javassist.version>3.22.0-GA</javassist.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <!--<version>3.0.1</version>  -->
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <!-- Log4j2 异步支持 -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>${disruptor.version}</version>
+        </dependency>
+        <!-- Apache Commons Logging 1.x接口的日志输出转向log4j2输出 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+        </dependency>
+
+        <!-- 集成redis 和spring session -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <!-- 集成缓存 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <!--集成freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+
+        <!-- 集成测试 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- 生成二维码工具类 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <!-- 解析客户端操作系统、浏览器等 -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>${bitwalker.version}</version>
+        </dependency>
+        <!-- 工具类 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+        <!-- 汉字转拼音工具类 -->
+        <dependency>
+            <groupId>com.github.stuxuhai</groupId>
+            <artifactId>jpinyin</artifactId>
+            <version>${jpinyin.version}</version>
+        </dependency>
+        <!-- 图片处理工具类 -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+        </dependency>
+        <!--分布式Id生成器 -->
+        <dependency>
+            <groupId>com.xuanner</groupId>
+            <artifactId>xsequence-core</artifactId>
+            <version>${xsequence.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
